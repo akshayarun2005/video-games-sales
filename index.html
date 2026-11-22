@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Global Video Game Sales Analysis</title>
+<meta name="description" content="Data science and visualization project: exploratory analysis of global video game sales by genre, platform, region and release year using Python, Pandas, NumPy, Matplotlib and Seaborn.">
+<meta property="og:title" content="Global Video Game Sales &amp; Gaming Trend Analysis">
+<meta property="og:description" content="Exploratory analysis of video game sales by genre, platform, region and release year.">
+<meta property="og:image" content="assets/genre.webp">
+<meta name="theme-color" content="#0e1424">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e1424'/%3E%3Cpath d='M9 12h14a3 3 0 0 1 3 3v3a3 3 0 0 1-5 2l-1-1h-8l-1 1a3 3 0 0 1-5-2v-3a3 3 0 0 1 3-3z' fill='%2378dcbe'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="dot"></span>VG Sales</a>
+  <nav aria-label="Sections">
+    <a href="#problem">Problem</a>
+    <a href="#method">Method</a>
+    <a href="#charts">Charts</a>
+    <a href="#different">Why it works</a>
+    <a href="#conclusion">Conclusion</a>
+    <a href="#future">Next</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Data Science &amp; Visualization Project</p>
+    <h1>Global Video Game Sales <span class="accent">&amp; Gaming Trend Analysis</span></h1>
+    <p class="lede">Exploratory analysis of which genres, platforms and regions drive video game sales, and how sales of leading titles vary across release years.</p>
+    <div class="chips" aria-label="Tools used">
+      <span>Python</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>Seaborn</span><span>Jupyter</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#charts">Explore the charts</a>
+      <a class="btn" href="#method">See the method</a>
+    </div>
+
+    <dl class="stats">
+      <div><dt>Dataset</dt><dd>VGChartz</dd><small>video game sales</small></div>
+      <div><dt>Sample</dt><dd data-count="100">100</dd><small>top-selling titles</small></div>
+      <div><dt>Top title</dt><dd>Wii Sports</dd><small>82.74M global sales</small></div>
+      <div><dt>Dimensions</dt><dd data-count="4">4</dd><small>genre, platform, region, year</small></div>
+    </dl>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="section">
+  <div class="wrap two">
+    <div class="reveal">
+      <p class="eyebrow">01 · Problem statement</p>
+      <h2>Raw sales tables hide the story</h2>
+      <p>The video game market spans many genres, platforms and regional audiences. A raw table makes it hard to see which categories and platforms perform strongly, how regional preferences differ, and how the sales of leading titles vary across release years.</p>
+    </div>
+    <div class="card objective reveal">
+      <h3>Project objective</h3>
+      <p>Use exploratory data analysis and visualizations to compare global and regional sales by genre, platform and release year, and communicate the resulting patterns clearly.</p>
+      <p class="scope"><strong>Scope:</strong> descriptive analysis only. No machine-learning prediction is required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- USES -->
+<section class="section alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">02 · Key uses</p>
+    <h2 class="reveal">What the analysis lets you do</h2>
+    <ul class="uses">
+      <li class="reveal"><span class="n">A</span>Identify the genres with the highest combined sales among the selected titles.</li>
+      <li class="reveal"><span class="n">B</span>Compare platforms by the combined global sales represented in the dataset.</li>
+      <li class="reveal"><span class="n">C</span>Understand the contribution of North America, Europe, Japan and other regions.</li>
+      <li class="reveal"><span class="n">D</span>Explore release-year patterns among the top-selling titles.</li>
+      <li class="reveal"><span class="n">E</span>Compare genre and platform combinations using a heatmap.</li>
+      <li class="reveal"><span class="n">F</span>Support introductory market research and data-driven discussion.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section id="method" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">03 · Methodology</p>
+    <h2 class="reveal">Six steps from CSV to insight</h2>
+    <ol class="steps">
+      <li class="reveal"><b>1</b><h3>Load</h3><p>Read the CSV using Pandas.</p></li>
+      <li class="reveal"><b>2</b><h3>Inspect</h3><p>Shape, data types, nulls, duplicates and statistics.</p></li>
+      <li class="reveal"><b>3</b><h3>Clean</h3><p>Convert numeric fields; remove duplicate and incomplete records.</p></li>
+      <li class="reveal"><b>4</b><h3>Analyse</h3><p>Group sales by genre, platform, region and year.</p></li>
+      <li class="reveal"><b>5</b><h3>Visualize</h3><p>Create bar charts, a pie chart, a line chart and a heatmap.</p></li>
+      <li class="reveal"><b>6</b><h3>Report</h3><p>Interpret patterns and export cleaned data and charts.</p></li>
+    </ol>
+
+    <h3 class="sub reveal">Project architecture</h3>
+    <div class="flow reveal" role="list">
+      <div class="node" role="listitem"><strong>CSV dataset</strong><span>Video game sales records</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="node" role="listitem"><strong>Data loading</strong><span>Pandas DataFrame</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="node" role="listitem"><strong>Preprocessing</strong><span>Type conversion, null and duplicate handling</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="node" role="listitem"><strong>Analysis</strong><span>GroupBy, aggregation, regional comparison</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="node" role="listitem"><strong>Visualization</strong><span>Matplotlib and Seaborn charts</span></div>
+      <i aria-hidden="true">→</i>
+      <div class="node" role="listitem"><strong>Outputs</strong><span>Cleaned CSV, plots and findings</span></div>
+    </div>
+    <p class="note reveal">The project runs locally in Jupyter Notebook or as a Python script.</p>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section id="charts" class="section alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">04 · Visualizations</p>
+    <h2 class="reveal">Explore the charts</h2>
+    <p class="sublede reveal">All charts are generated from the included 100-record sample.</p>
+
+    <div class="viewer reveal">
+      <div class="tabs" role="tablist" aria-label="Choose a chart">
+        <button role="tab" aria-selected="true" aria-controls="panel" id="t-genre" data-key="genre">Genre</button>
+        <button role="tab" aria-selected="false" aria-controls="panel" id="t-platform" data-key="platform">Platform</button>
+        <button role="tab" aria-selected="false" aria-controls="panel" id="t-region" data-key="region">Region</button>
+        <button role="tab" aria-selected="false" aria-controls="panel" id="t-year" data-key="year">Release year</button>
+      </div>
+
+      <div class="panel" id="panel" role="tabpanel" aria-labelledby="t-genre">
+        <button class="figure" id="figure" type="button" aria-label="Open chart full size">
+          <img id="chartImg" src="assets/genre.webp" alt="Horizontal bar chart of global sales by genre for the top 100 games" width="1571" height="929">
+          <span class="zoom">Click to enlarge</span>
+        </button>
+        <div class="reading">
+          <h3 id="chartTitle">Global sales by genre</h3>
+          <p id="chartText"></p>
+          <ul class="facts" id="chartFacts"></ul>
+          <div class="share" id="regionShare" hidden>
+            <div class="bar" data-k="na"><span>North America</span><div><i style="--w:48.2%"></i></div><b>48.2%</b></div>
+            <div class="bar" data-k="eu"><span>Europe</span><div><i style="--w:28.8%"></i></div><b>28.8%</b></div>
+            <div class="bar" data-k="jp"><span>Japan</span><div><i style="--w:14%"></i></div><b>14.0%</b></div>
+            <div class="bar" data-k="ot"><span>Other</span><div><i style="--w:9%"></i></div><b>9.0%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENT -->
+<section id="different" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">05 · Why this approach stands out</p>
+    <h2 class="reveal">Compared with reviewing raw tables</h2>
+    <div class="compare reveal">
+      <div class="col old">
+        <h3>Existing approach</h3>
+        <dl>
+          <dt>Data view</dt><dd>Raw tables or separate static summaries</dd>
+          <dt>Comparison</dt><dd>Often requires manual filtering across categories</dd>
+          <dt>Insights</dt><dd>Patterns across genres, platforms and regions can be harder to spot</dd>
+          <dt>Updates</dt><dd>Repeated manual work when the data changes</dd>
+          <dt>Presentation</dt><dd>Numbers may be less intuitive to interpret</dd>
+        </dl>
+      </div>
+      <div class="col new">
+        <h3>Our project</h3>
+        <dl>
+          <dt>Data view</dt><dd>Visual analysis of genre, platform, region and year</dd>
+          <dt>Comparison</dt><dd>Grouped analysis brings multiple dimensions together</dd>
+          <dt>Insights</dt><dd>Charts and a heatmap make patterns easier to identify</dd>
+          <dt>Updates</dt><dd>Reusable Python workflow for cleaning and analysis</dd>
+          <dt>Presentation</dt><dd>Bar, pie and line charts communicate findings clearly</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="callout reveal"><strong>Our advantage:</strong> a clear, repeatable and visual way to explore sales trends across multiple dimensions.</p>
+    <p class="note reveal">Current results use the included top-100 sample; broader conclusions require the full dataset.</p>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section id="conclusion" class="section alt">
+  <div class="wrap two">
+    <div class="reveal">
+      <p class="eyebrow">06 · Conclusion</p>
+      <h2>What we learned</h2>
+      <ul class="ticks">
+        <li>The project demonstrates a complete beginner-level data analysis workflow.</li>
+        <li>Sales can be compared across genres, platforms, regions and release years using grouped summaries.</li>
+        <li>Visualizations make patterns in the selected records easier to interpret than raw tables.</li>
+        <li>The output includes a cleaned CSV file and reusable charts.</li>
+        <li>Results are descriptive and limited to the included top-100 sample.</li>
+      </ul>
+    </div>
+    <div class="card highlight reveal">
+      <p class="eyebrow">Highest-ranked title in the sample</p>
+      <div class="big">Wii Sports</div>
+      <div class="bignum"><span data-count="82.74" data-dec="2">82.74</span><small>million global sales</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURE -->
+<section id="future" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">07 · Future implementation</p>
+    <h2 class="reveal">Where this goes next</h2>
+    <ul class="future">
+      <li class="reveal"><h3>Full dataset</h3><p>Use the full 16,000+ record dataset to improve market coverage.</p></li>
+      <li class="reveal"><h3>Review scores</h3><p>Add critic and user review scores to study their relationship with sales.</p></li>
+      <li class="reveal"><h3>Interactive dashboard</h3><p>Build an interactive dashboard with Streamlit or Plotly.</p></li>
+      <li class="reveal"><h3>Filters</h3><p>Add filters for year, genre, platform and publisher.</p></li>
+      <li class="reveal"><h3>Prediction</h3><p>Explore sales prediction with regression models and proper validation.</p></li>
+      <li class="reveal"><h3>Fresh data</h3><p>Refresh the dataset with recent releases from a reliable, documented source.</p></li>
+    </ul>
+    <p class="note reveal">Future work can extend this descriptive project into an interactive analytics application.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Global Video Game Sales &amp; Gaming Trend Analysis · Data Science &amp; Visualization Project</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="close" id="lbClose" aria-label="Close">×</button>
+  <img id="lbImg" alt="">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
