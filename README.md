@@ -5,8 +5,9 @@ Static website for the Data Science & Visualization project. No build step, so V
 ```
 index.html     page content
 styles.css     styling
-script.js      chart tabs, lightbox, animations
-assets/        the four charts from the presentation (webp)
+script.js      interactive dashboard (SVG charts, filters, tooltips)
+data.js        all numbers behind the dashboard, computed from the CSV with pandas
+assets/        original charts (webp), presentation (pptx), vgsales.csv, games.js (explorer data)
 vercel.json    clean URLs + asset caching
 ```
 

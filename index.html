@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Global Video Game Sales Analysis</title>
-<meta name="description" content="Data science and visualization project: exploratory analysis of global video game sales by genre, platform, region and release year using Python, Pandas, NumPy, Matplotlib and Seaborn.">
+<meta name="description" content="Data science and visualization project: exploratory analysis of global video game sales by genre, platform, region and release year using Python, Pandas, NumPy, Matplotlib and Seaborn. Includes an interactive dashboard.">
 <meta property="og:title" content="Global Video Game Sales &amp; Gaming Trend Analysis">
-<meta property="og:description" content="Exploratory analysis of video game sales by genre, platform, region and release year.">
+<meta property="og:description" content="Interactive exploration of video game sales by genre, platform, region and release year.">
 <meta property="og:image" content="assets/genre.webp">
 <meta name="theme-color" content="#0e1424">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e1424'/%3E%3Cpath d='M9 12h14a3 3 0 0 1 3 3v3a3 3 0 0 1-5 2l-1-1h-8l-1 1a3 3 0 0 1-5-2v-3a3 3 0 0 1 3-3z' fill='%2378dcbe'/%3E%3C/svg%3E">
@@ -17,15 +17,17 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="nav">
   <a class="brand" href="#top"><span class="dot"></span>VG Sales</a>
   <nav aria-label="Sections">
     <a href="#problem">Problem</a>
     <a href="#method">Method</a>
-    <a href="#charts">Charts</a>
-    <a href="#different">Why it works</a>
-    <a href="#conclusion">Conclusion</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#findings">Findings</a>
+    <a href="#explorer">Explorer</a>
+    <a href="#limits">Limitations</a>
     <a href="#future">Next</a>
   </nav>
 </header>
@@ -42,16 +44,25 @@
       <span>Python</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>Seaborn</span><span>Jupyter</span>
     </div>
     <div class="cta">
-      <a class="btn primary" href="#charts">Explore the charts</a>
-      <a class="btn" href="#method">See the method</a>
+      <a class="btn primary" href="#dashboard">Open the dashboard</a>
+      <a class="btn" href="#findings">Read the findings</a>
+      <a class="btn" href="#explorer">Browse all games</a>
+      <a class="btn" href="assets/video-game-sales-presentation.pptx" download>Download slides</a>
     </div>
 
     <dl class="stats">
-      <div><dt>Dataset</dt><dd>VGChartz</dd><small>video game sales</small></div>
-      <div><dt>Sample</dt><dd data-count="100">100</dd><small>top-selling titles</small></div>
+      <div><dt>Dataset</dt><dd>VGChartz</dd><small>16,598 games in the full file</small></div>
+      <div><dt>Sample</dt><dd data-count="100">100</dd><small>top-selling titles analysed</small></div>
       <div><dt>Top title</dt><dd>Wii Sports</dd><small>82.74M global sales</small></div>
-      <div><dt>Dimensions</dt><dd data-count="4">4</dd><small>genre, platform, region, year</small></div>
+      <div><dt>Dimensions</dt><dd data-count="5">5</dd><small>genre, platform, publisher, region, year</small></div>
     </dl>
+  </div>
+</section>
+
+<!-- HEADLINE NUMBERS -->
+<section class="headline" aria-label="Headline findings">
+  <div class="wrap">
+    <div class="tiles" id="tiles"></div>
   </div>
 </section>
 
@@ -119,37 +130,90 @@
   </div>
 </section>
 
-<!-- CHARTS -->
-<section id="charts" class="section alt">
+<!-- DASHBOARD -->
+<section id="dashboard" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">04 · Visualizations</p>
-    <h2 class="reveal">Explore the charts</h2>
-    <p class="sublede reveal">All charts are generated from the included 100-record sample.</p>
+    <p class="eyebrow reveal">04 · Interactive dashboard</p>
+    <h2 class="reveal">Explore the sales data</h2>
+    <p class="sublede reveal">Hover, tap or use the keyboard on any bar, slice, cell or point. Sales are in millions of units. Switch between the project's top-100 sample and the full dataset to see how the picture changes.</p>
 
-    <div class="viewer reveal">
-      <div class="tabs" role="tablist" aria-label="Choose a chart">
-        <button role="tab" aria-selected="true" aria-controls="panel" id="t-genre" data-key="genre">Genre</button>
-        <button role="tab" aria-selected="false" aria-controls="panel" id="t-platform" data-key="platform">Platform</button>
-        <button role="tab" aria-selected="false" aria-controls="panel" id="t-region" data-key="region">Region</button>
-        <button role="tab" aria-selected="false" aria-controls="panel" id="t-year" data-key="year">Release year</button>
-      </div>
-
-      <div class="panel" id="panel" role="tabpanel" aria-labelledby="t-genre">
-        <button class="figure" id="figure" type="button" aria-label="Open chart full size">
-          <img id="chartImg" src="assets/genre.webp" alt="Horizontal bar chart of global sales by genre for the top 100 games" width="1571" height="929">
-          <span class="zoom">Click to enlarge</span>
-        </button>
-        <div class="reading">
-          <h3 id="chartTitle">Global sales by genre</h3>
-          <p id="chartText"></p>
-          <ul class="facts" id="chartFacts"></ul>
-          <div class="share" id="regionShare" hidden>
-            <div class="bar" data-k="na"><span>North America</span><div><i style="--w:48.2%"></i></div><b>48.2%</b></div>
-            <div class="bar" data-k="eu"><span>Europe</span><div><i style="--w:28.8%"></i></div><b>28.8%</b></div>
-            <div class="bar" data-k="jp"><span>Japan</span><div><i style="--w:14%"></i></div><b>14.0%</b></div>
-            <div class="bar" data-k="ot"><span>Other</span><div><i style="--w:9%"></i></div><b>9.0%</b></div>
+    <div class="dash reveal">
+      <div class="dash-top">
+        <div class="tabs" role="tablist" aria-label="Choose a chart">
+          <button role="tab" aria-selected="true" id="t-genre" data-key="genre">Genre</button>
+          <button role="tab" aria-selected="false" id="t-platform" data-key="platform">Platform</button>
+          <button role="tab" aria-selected="false" id="t-publisher" data-key="publisher">Publisher</button>
+          <button role="tab" aria-selected="false" id="t-region" data-key="region">Region</button>
+          <button role="tab" aria-selected="false" id="t-year" data-key="year">Release year</button>
+          <button role="tab" aria-selected="false" id="t-heat" data-key="heat">Genre × Platform</button>
+        </div>
+        <div class="ctl dataset">
+          <span class="ctl-label">Data</span>
+          <div class="seg" role="group" aria-label="Choose the dataset" id="setSeg">
+            <button type="button" data-set="top" aria-pressed="true">Top-100 sample</button>
+            <button type="button" data-set="full" aria-pressed="false">All 16,598 games</button>
           </div>
         </div>
+      </div>
+
+      <div class="dash-grid" id="panel" role="tabpanel" aria-labelledby="t-genre">
+        <div class="chart-card">
+          <div class="chart-head">
+            <div>
+              <span class="badge" id="badge"></span>
+              <h3 id="cTitle"></h3>
+              <p id="cSub"></p>
+            </div>
+            <div class="controls" id="controls"></div>
+          </div>
+          <div class="chart-host" id="host"></div>
+          <p class="chart-note" id="chartNote" hidden></p>
+          <div class="chart-foot">
+            <button type="button" class="link" id="origBtn" aria-pressed="false">Compare with the original Matplotlib chart</button>
+            <details class="tbl">
+              <summary>View as data table</summary>
+              <div id="tableHost"></div>
+            </details>
+          </div>
+        </div>
+
+        <aside class="side" aria-live="polite">
+          <div class="detail" id="detail"></div>
+          <ul class="facts" id="facts"></ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINDINGS -->
+<section id="findings" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">05 · Findings</p>
+    <h2 class="reveal">What the data says</h2>
+    <div class="findings" id="findingsList"></div>
+  </div>
+</section>
+
+<!-- EXPLORER -->
+<section id="explorer" class="section alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">06 · Data explorer</p>
+    <h2 class="reveal">Browse all 16,598 games</h2>
+    <p class="sublede reveal">Search the full dataset by title or publisher, filter by genre and platform, and sort by any column. <a href="assets/vgsales.csv" download>Download the CSV</a> to check the numbers yourself.</p>
+    <div class="ex reveal" id="ex">
+      <div class="ex-controls">
+        <label class="field grow"><span>Search</span><input type="search" id="exQ" placeholder="Title or publisher, e.g. Zelda" autocomplete="off"></label>
+        <label class="field"><span>Genre</span><select id="exGenre"><option value="">All genres</option></select></label>
+        <label class="field"><span>Platform</span><select id="exPlat"><option value="">All platforms</option></select></label>
+        <button type="button" class="btn small" id="exReset">Reset</button>
+      </div>
+      <p class="ex-count" id="exCount" aria-live="polite">Loading the dataset…</p>
+      <div class="tbl-scroll ex-table" id="exTable"></div>
+      <div class="pager">
+        <button type="button" class="btn small" id="exPrev">← Previous</button>
+        <span id="exPage"></span>
+        <button type="button" class="btn small" id="exNext">Next →</button>
       </div>
     </div>
   </div>
@@ -158,7 +222,7 @@
 <!-- DIFFERENT -->
 <section id="different" class="section">
   <div class="wrap">
-    <p class="eyebrow reveal">05 · Why this approach stands out</p>
+    <p class="eyebrow reveal">07 · Why this approach stands out</p>
     <h2 class="reveal">Compared with reviewing raw tables</h2>
     <div class="compare reveal">
       <div class="col old">
@@ -183,15 +247,29 @@
       </div>
     </div>
     <p class="callout reveal"><strong>Our advantage:</strong> a clear, repeatable and visual way to explore sales trends across multiple dimensions.</p>
-    <p class="note reveal">Current results use the included top-100 sample; broader conclusions require the full dataset.</p>
+  </div>
+</section>
+
+<!-- LIMITS -->
+<section id="limits" class="section alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">08 · Limitations &amp; data notes</p>
+    <h2 class="reveal">What these results can and can't tell you</h2>
+    <div class="limits">
+      <div class="card reveal"><h3>Sample vs the whole market</h3><p>The project analysis covers the 100 best-selling titles, so it describes blockbusters. Switch the dashboard to "All games" to see how the conclusions change across every record.</p></div>
+      <div class="card reveal"><h3>Units, not revenue</h3><p>Sales are in millions of units sold. Price differences between platforms and eras mean units are not the same as money earned.</p></div>
+      <div class="card reveal"><h3>Estimates and gaps</h3><p>VGChartz figures are estimates, not audited publisher data. Coverage thins after 2016 (344 titles in 2016, 3 in 2017). 271 games have no release year and 58 have no publisher, so they are left out of those charts.</p></div>
+      <div class="card reveal"><h3>Descriptive, not causal</h3><p>The analysis shows what happened, not why. For example, lower totals in recent years may reflect incomplete data or newer titles having had less time to sell.</p></div>
+    </div>
+    <p class="note reveal"><strong>About the numbers on this page:</strong> every figure is computed directly from the project's CSV (vgsales.csv, 16,598 records) with pandas, and the top-100 results match the charts in the original presentation. The original Matplotlib charts are one click away under each top-100 chart.</p>
   </div>
 </section>
 
 <!-- CONCLUSION -->
-<section id="conclusion" class="section alt">
+<section id="conclusion" class="section">
   <div class="wrap two">
     <div class="reveal">
-      <p class="eyebrow">06 · Conclusion</p>
+      <p class="eyebrow">09 · Conclusion</p>
       <h2>What we learned</h2>
       <ul class="ticks">
         <li>The project demonstrates a complete beginner-level data analysis workflow.</li>
@@ -199,6 +277,7 @@
         <li>Visualizations make patterns in the selected records easier to interpret than raw tables.</li>
         <li>The output includes a cleaned CSV file and reusable charts.</li>
         <li>Results are descriptive and limited to the included top-100 sample.</li>
+        <li>Comparing the sample with the full dataset shows how much blockbuster titles shape the picture.</li>
       </ul>
     </div>
     <div class="card highlight reveal">
@@ -210,15 +289,15 @@
 </section>
 
 <!-- FUTURE -->
-<section id="future" class="section">
+<section id="future" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">07 · Future implementation</p>
+    <p class="eyebrow reveal">10 · Future implementation</p>
     <h2 class="reveal">Where this goes next</h2>
     <ul class="future">
-      <li class="reveal"><h3>Full dataset</h3><p>Use the full 16,000+ record dataset to improve market coverage.</p></li>
+      <li class="reveal"><h3>Full dataset</h3><p>Extend the full 16,000+ record view previewed on this page into a complete analysis.</p></li>
       <li class="reveal"><h3>Review scores</h3><p>Add critic and user review scores to study their relationship with sales.</p></li>
-      <li class="reveal"><h3>Interactive dashboard</h3><p>Build an interactive dashboard with Streamlit or Plotly.</p></li>
-      <li class="reveal"><h3>Filters</h3><p>Add filters for year, genre, platform and publisher.</p></li>
+      <li class="reveal"><h3>Interactive dashboard</h3><p>Take this dashboard further with Streamlit or Plotly.</p></li>
+      <li class="reveal"><h3>Filters</h3><p>Add year and publisher filters to the explorer, building on the search and genre and platform filters here.</p></li>
       <li class="reveal"><h3>Prediction</h3><p>Explore sales prediction with regression models and proper validation.</p></li>
       <li class="reveal"><h3>Fresh data</h3><p>Refresh the dataset with recent releases from a reliable, documented source.</p></li>
     </ul>
@@ -231,16 +310,13 @@
 <footer>
   <div class="wrap">
     <span>Global Video Game Sales &amp; Gaming Trend Analysis · Data Science &amp; Visualization Project</span>
-    <a href="#top">Back to top ↑</a>
+    <span><a href="assets/video-game-sales-presentation.pptx" download>Download slides</a> · <a href="#top">Back to top ↑</a></span>
   </div>
 </footer>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" hidden>
-  <button class="close" id="lbClose" aria-label="Close">×</button>
-  <img id="lbImg" alt="">
-</div>
+<div class="tip" id="tip" role="tooltip" hidden></div>
 
+<script src="data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
