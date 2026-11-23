@@ -887,6 +887,15 @@
   window.addEventListener('scroll', function () { onScroll(); hideTip(); }, { passive: true });
   onScroll();
 
+  /* links from the Objectives section: switch dataset and/or chart, then the anchor scrolls to the dashboard */
+  Array.prototype.forEach.call(document.querySelectorAll('a[data-go], a[data-set]'), function (a) {
+    a.addEventListener('click', function () {
+      var ds = a.getAttribute('data-set'), key = a.getAttribute('data-go');
+      if (ds) setDataset(ds);
+      if (key) selectTab(key);
+    });
+  });
+
   resetForSet();
   selectTab('genre');
 })();

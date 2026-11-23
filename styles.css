@@ -284,7 +284,7 @@ footer a{text-decoration:none;color:var(--accent)}
 .js .reveal.in{opacity:1;transform:none}
 
 @media (max-width:900px){
-  .two,.compare,.findings{grid-template-columns:1fr}
+  .two,.compare,.findings,.objs{grid-template-columns:1fr}
   .dash-grid{grid-template-columns:minmax(0,1fr)}
   .side{position:static}
   .tiles,.limits{grid-template-columns:1fr 1fr}
@@ -292,10 +292,9 @@ footer a{text-decoration:none;color:var(--accent)}
   .stats{grid-template-columns:1fr 1fr}
   .flow{flex-direction:column}
   .flow i{transform:rotate(90deg)}
-  .nav nav a:nth-child(n+4){display:none}
 }
 @media (max-width:560px){
-  .uses,.steps,.future,.tiles,.limits{grid-template-columns:1fr}
+  .uses,.steps,.future,.tiles,.limits,.objs{grid-template-columns:1fr}
   .chart-card{padding:16px}
   .tile{padding:4px 16px}
   .brand{font-size:15px}
@@ -305,4 +304,58 @@ footer a{text-decoration:none;color:var(--accent)}
   .js .reveal{opacity:1;transform:none;transition:none}
   *{transition-duration:.01ms!important}
   svg .bar{animation:none}
+}
+
+/* byline */
+.byline{margin:0 0 22px;color:var(--muted);font-size:.98rem;line-height:1.7;max-width:62ch}
+.byline strong{color:var(--text)}
+
+/* intro + dataset glance */
+.two.top{align-items:start}
+.glance h3{color:var(--accent);margin-bottom:6px}
+.glance dl{margin:10px 0 0}
+.glance dl>div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line);font-size:.95rem}
+.glance dt{color:var(--muted)}
+.glance dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+
+/* literature table */
+.lit{max-height:none;margin-top:8px;background:var(--card)}
+.lit-tbl{width:100%;min-width:1000px;table-layout:fixed;border-collapse:collapse;font-size:.88rem}
+.lit-tbl th,.lit-tbl td{padding:14px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);color:#d5deec;line-height:1.5}
+.lit-tbl thead th{background:var(--bg-2);color:var(--muted);font:600 12px var(--body);letter-spacing:.06em;text-transform:uppercase}
+.lit-tbl tbody tr:last-child td{border-bottom:0}
+.lit-tbl td:first-child{text-align:center;color:var(--accent);font-weight:700}
+.lit-tbl td:nth-child(2){font-weight:600;color:var(--text)}
+.lit-tbl th:nth-child(1){width:5%}.lit-tbl th:nth-child(2){width:12%}.lit-tbl th:nth-child(3){width:20%}.lit-tbl th:nth-child(4){width:17%}.lit-tbl th:nth-child(5){width:15%}.lit-tbl th:nth-child(6){width:15%}.lit-tbl th:nth-child(7){width:16%}
+.lit-tbl a{color:var(--accent);text-decoration:none;font-weight:600}
+.lit-tbl a:hover{text-decoration:underline}
+
+/* research gaps */
+.gaplist{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:14px;max-width:880px}
+.gaplist li{display:flex;gap:16px;align-items:flex-start;padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius);background:var(--card)}
+.gaplist .n{flex:none;width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:rgba(120,220,190,.14);color:var(--accent);font:700 14px var(--display)}
+.gaplist p{margin:3px 0 0;color:#d5deec}
+
+/* objectives */
+.objs{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.objs li{display:flex;gap:16px;padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);transition:.25s}
+.objs li:hover{border-color:rgba(120,220,190,.5);transform:translateY(-2px)}
+.objs .on{flex:none;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:700 17px var(--display)}
+.objs h3{font-size:1.1rem;margin-bottom:6px}
+.objs p{margin:0 0 12px;color:#c7d2e3;font-size:.95rem}
+.see{display:flex;flex-wrap:wrap;gap:8px}
+.see a{padding:5px 12px;border:1px solid rgba(120,220,190,.45);border-radius:999px;color:var(--accent);font:600 13px var(--body);text-decoration:none;transition:.2s}
+.see a:hover{background:rgba(120,220,190,.14)}
+
+/* references */
+.refs{margin:28px 0 0;padding-left:2.2em;display:grid;gap:12px;max-width:920px;color:#c7d2e3;font-size:.95rem}
+.refs li::marker{color:var(--accent);font-weight:700;content:"[" counter(list-item) "]  "}
+.refs a{color:var(--accent);word-break:break-all}
+
+@media (max-width:900px){
+  .objs{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .objs li{padding:18px;gap:12px}
+  .gaplist li{padding:16px}
 }

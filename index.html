@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Global Video Game Sales Analysis</title>
+<title>Global Video Game Sales Analysis · Akshay A</title>
 <meta name="description" content="Data science and visualization project: exploratory analysis of global video game sales by genre, platform, region and release year using Python, Pandas, NumPy, Matplotlib and Seaborn. Includes an interactive dashboard.">
 <meta property="og:title" content="Global Video Game Sales &amp; Gaming Trend Analysis">
 <meta property="og:description" content="Interactive exploration of video game sales by genre, platform, region and release year.">
@@ -22,13 +22,16 @@
 <header class="nav">
   <a class="brand" href="#top"><span class="dot"></span>VG Sales</a>
   <nav aria-label="Sections">
+    <a href="#intro">Introduction</a>
+    <a href="#literature">Literature</a>
+    <a href="#gaps">Gaps</a>
     <a href="#problem">Problem</a>
-    <a href="#method">Method</a>
+    <a href="#objectives">Objectives</a>
+    <a href="#method">Work</a>
     <a href="#dashboard">Dashboard</a>
     <a href="#findings">Findings</a>
     <a href="#explorer">Explorer</a>
-    <a href="#limits">Limitations</a>
-    <a href="#future">Next</a>
+    <a href="#references">References</a>
   </nav>
 </header>
 
@@ -40,6 +43,7 @@
     <p class="eyebrow">Data Science &amp; Visualization Project</p>
     <h1>Global Video Game Sales <span class="accent">&amp; Gaming Trend Analysis</span></h1>
     <p class="lede">Exploratory analysis of which genres, platforms and regions drive video game sales, and how sales of leading titles vary across release years.</p>
+    <p class="byline"><strong>Akshay A</strong> (ENG24CT0027) · B.Tech (CST)<br>Under the supervision of Mr. Sayed Faizan Qasar, Assistant Professor<br>Department of Computer Science and Technology, Dayananda Sagar University, Bangalore, Karnataka</p>
     <div class="chips" aria-label="Tools used">
       <span>Python</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>Seaborn</span><span>Jupyter</span>
     </div>
@@ -66,26 +70,106 @@
   </div>
 </section>
 
-<!-- PROBLEM -->
-<section id="problem" class="section">
-  <div class="wrap two">
+<!-- INTRODUCTION -->
+<section id="intro" class="section">
+  <div class="wrap two top">
     <div class="reveal">
-      <p class="eyebrow">01 · Problem statement</p>
-      <h2>Raw sales tables hide the story</h2>
-      <p>The video game market spans many genres, platforms and regional audiences. A raw table makes it hard to see which categories and platforms perform strongly, how regional preferences differ, and how the sales of leading titles vary across release years.</p>
+      <p class="eyebrow">01 · Introduction</p>
+      <h2>Making sense of a market with thousands of titles</h2>
+      <p>The global video game industry spans many genres, platforms and regional audiences. Raw sales tables make it hard to see which categories perform strongly and how preferences differ.</p>
+      <p>This project performs exploratory data analysis (EDA) on the VGChartz video game sales dataset: 16,598 games with 11 attributes (rank, name, platform, release year, genre, publisher, and North America, Europe, Japan, other and global sales).</p>
+      <p>Python (Pandas, NumPy) is used for cleaning and aggregation, and Matplotlib and Seaborn for visualization. Sales are compared by genre, platform, publisher, region and release year, first for the 100 best-selling titles and then for the full dataset. The findings are published as this interactive web dashboard.</p>
     </div>
-    <div class="card objective reveal">
-      <h3>Project objective</h3>
-      <p>Use exploratory data analysis and visualizations to compare global and regional sales by genre, platform and release year, and communicate the resulting patterns clearly.</p>
-      <p class="scope"><strong>Scope:</strong> descriptive analysis only. No machine-learning prediction is required.</p>
+    <div class="card glance reveal">
+      <h3>Dataset at a glance</h3>
+      <dl>
+        <div><dt>Source</dt><dd>VGChartz (vgsales.csv)</dd></div>
+        <div><dt>Records / attributes</dt><dd>16,598 / 11</dd></div>
+        <div><dt>Platforms / genres</dt><dd>31 / 12</dd></div>
+        <div><dt>Publishers</dt><dd>578</dd></div>
+        <div><dt>Release years</dt><dd>1980 to 2020</dd></div>
+        <div><dt>Total global sales</dt><dd>8,920M units</dd></div>
+        <div><dt>Top-100 sample sales</dt><dd>1,462M units</dd></div>
+        <div><dt>Top title</dt><dd>Wii Sports (82.74M)</dd></div>
+      </dl>
     </div>
   </div>
 </section>
 
-<!-- USES -->
-<section class="section alt">
+<!-- LITERATURE SURVEY -->
+<section id="literature" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">02 · Key uses</p>
+    <p class="eyebrow reveal">02 · Literature survey</p>
+    <h2 class="reveal">What existing studies have done</h2>
+    <p class="sublede reveal">Four published studies on video game industry and sales analysis. Performance metrics are taken from each paper's abstract; "not stated" means the abstract does not report them. Numbers in brackets refer to the <a href="#references">references</a>.</p>
+    <div class="tbl-scroll lit reveal" tabindex="0" role="region" aria-label="Literature survey table (scrolls sideways on small screens)">
+      <table class="lit-tbl">
+        <thead><tr><th>Sr No.</th><th>Author / Year</th><th>Title</th><th>Methodology / Algorithm</th><th>Performance evaluation metrics</th><th>Strength</th><th>Limitation / Research gap</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Marchand &amp; Hennig-Thurau (2013) <a href="https://doi.org/10.1016/j.intmar.2013.05.001" rel="noopener">[1]</a></td><td>Value creation in the video game industry: industry economics, consumer benefits, and research opportunities</td><td>Conceptual framework and literature review</td><td>None (conceptual paper, no empirical data)</td><td>Explains how value is created in the games industry and sets a research agenda</td><td>Does not analyse actual sales patterns across genres, platforms or regions</td></tr>
+          <tr><td>2</td><td>Heidenreich, Handrich &amp; Kraemer (2023) <a href="https://doi.org/10.1007/s12525-023-00647-2" rel="noopener">[2]</a></td><td>Flawless victory! Investigating search and experience qualities as antecedent predictors of video game success</td><td>Multiple regression on 351 PC games (2010-2015); VGChartz European sales</td><td>R² = 0.201 (short-term) and 0.143 (long-term) for the search-quality model</td><td>Shows that reviews, brand popularity and awards are linked to sales</td><td>Small sample, PC games only, European sales only</td></tr>
+          <tr><td>3</td><td>Wu (2024) <a href="https://doi.org/10.5220/0013205800004568" rel="noopener">[3]</a></td><td>Machine learning models-based video game sales prediction</td><td>Linear regression, SVM, KNN, random forest and gradient boosting on Kaggle sales data (16,719 games)</td><td>Not given in the abstract; gradient boosting reported as best</td><td>Compares several models and proposes a feature selection method</td><td>Focuses on prediction, not on descriptive comparison by genre, platform or region</td></tr>
+          <tr><td>4</td><td>Gray, Shalan &amp; Kadlec (2024) <a href="https://doi.org/10.1109/CICN63059.2024.10847429" rel="noopener">[4]</a></td><td>Sales predictions for video games using predictive analytics of market data</td><td>Linear regression and decision trees</td><td>Not stated in the abstract</td><td>Shows predictive analytics can be applied to game sales forecasting</td><td>Dataset and results not described; no visual analysis</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH GAPS -->
+<section id="gaps" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">03 · Research gaps</p>
+    <h2 class="reveal">What the literature leaves open</h2>
+    <ol class="gaplist">
+      <li class="reveal"><span class="n">1</span><p>Most surveyed studies focus on predicting sales with regression or machine learning, and give limited descriptive, visual comparison of sales by genre, platform, publisher and region.</p></li>
+      <li class="reveal"><span class="n">2</span><p>Several studies rely on small or restricted samples (for example 351 PC games, or European sales only), so their findings may not generalize across platforms and regions.</p></li>
+      <li class="reveal"><span class="n">3</span><p>Conceptual work on the industry provides frameworks, but little quantitative evidence from sales data.</p></li>
+      <li class="reveal"><span class="n">4</span><p>Few studies compare conclusions drawn from best-selling titles with those drawn from the whole market.</p></li>
+      <li class="reveal"><span class="n">5</span><p>Analyses are rarely delivered as reusable, interactive tools that non-technical users can explore.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="section alt">
+  <div class="wrap two">
+    <div class="reveal">
+      <p class="eyebrow">04 · Problem statement</p>
+      <h2>Raw sales tables hide the story</h2>
+      <p>The video game market includes many genres, platforms and regional audiences. Raw sales tables make it difficult to identify which categories and platforms perform strongly, how regional preferences differ, and how the sales of leading titles vary across release years.</p>
+    </div>
+    <div class="card objective reveal">
+      <h3>Problem</h3>
+      <p>To design a reusable exploratory analysis and visualization workflow, and an interactive dashboard, that compares global and regional video game sales by genre, platform, publisher and release year using the VGChartz dataset (16,598 games), and shows how far results from the top-100 titles hold for the full dataset.</p>
+      <p class="scope"><strong>Scope:</strong> descriptive analysis only; no machine-learning prediction is required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section id="objectives" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">05 · Objectives</p>
+    <h2 class="reveal">Eight objectives, each answered on this page</h2>
+    <p class="sublede reveal">Each objective links to the part of the dashboard that delivers it. The links switch the chart for you.</p>
+    <ol class="objs">
+      <li class="reveal"><span class="on">1</span><div><h3>Clean and prepare the data</h3><p>Clean and prepare the VGChartz sales dataset (type conversion, missing values and duplicates).</p><div class="see"><a href="#method">Summary of work</a></div></div></li>
+      <li class="reveal"><span class="on">2</span><div><h3>Top genres</h3><p>Identify the genres with the highest combined global sales.</p><div class="see"><a href="#dashboard" data-go="genre">Genre chart</a></div></div></li>
+      <li class="reveal"><span class="on">3</span><div><h3>Top platforms and publishers</h3><p>Identify the platforms and publishers with the highest combined global sales.</p><div class="see"><a href="#dashboard" data-go="platform">Platform chart</a><a href="#dashboard" data-go="publisher">Publisher chart</a></div></div></li>
+      <li class="reveal"><span class="on">4</span><div><h3>Regional comparison</h3><p>Compare the contribution of North America, Europe, Japan and other regions to global sales.</p><div class="see"><a href="#dashboard" data-go="region">Region chart</a></div></div></li>
+      <li class="reveal"><span class="on">5</span><div><h3>Release-year patterns</h3><p>Study how sales vary by release year and find the peak periods.</p><div class="see"><a href="#dashboard" data-go="year">Release-year chart</a></div></div></li>
+      <li class="reveal"><span class="on">6</span><div><h3>Genre and platform combinations</h3><p>Explore genre and platform combinations using a heatmap.</p><div class="see"><a href="#dashboard" data-go="heat">Heatmap</a></div></div></li>
+      <li class="reveal"><span class="on">7</span><div><h3>Sample vs full dataset</h3><p>Compare the top-100 sample with the full 16,598-game dataset to test how far the conclusions generalize.</p><div class="see"><a href="#dashboard" data-set="full">Show all 16,598 games</a><a href="#dashboard" data-set="top">Show the top-100 sample</a></div></div></li>
+      <li class="reveal"><span class="on">8</span><div><h3>Communicate the findings</h3><p>Communicate the findings with charts and a deployed interactive web dashboard.</p><div class="see"><a href="#dashboard">Dashboard</a><a href="#findings">Findings</a><a href="#explorer">Data explorer</a></div></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- KEY USES -->
+<section id="uses" class="section alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">06 · Key uses</p>
     <h2 class="reveal">What the analysis lets you do</h2>
     <ul class="uses">
       <li class="reveal"><span class="n">A</span>Identify the genres with the highest combined sales among the selected titles.</li>
@@ -101,39 +185,39 @@
 <!-- METHOD -->
 <section id="method" class="section">
   <div class="wrap">
-    <p class="eyebrow reveal">03 · Methodology</p>
+    <p class="eyebrow reveal">07 · Summary of work</p>
     <h2 class="reveal">Six steps from CSV to insight</h2>
     <ol class="steps">
       <li class="reveal"><b>1</b><h3>Load</h3><p>Read the CSV using Pandas.</p></li>
       <li class="reveal"><b>2</b><h3>Inspect</h3><p>Shape, data types, nulls, duplicates and statistics.</p></li>
-      <li class="reveal"><b>3</b><h3>Clean</h3><p>Convert numeric fields; remove duplicate and incomplete records.</p></li>
-      <li class="reveal"><b>4</b><h3>Analyse</h3><p>Group sales by genre, platform, region and year.</p></li>
+      <li class="reveal"><b>3</b><h3>Clean</h3><p>Convert numeric fields; handle duplicate and incomplete records.</p></li>
+      <li class="reveal"><b>4</b><h3>Analyse</h3><p>Group sales by genre, platform, publisher, region and year.</p></li>
       <li class="reveal"><b>5</b><h3>Visualize</h3><p>Create bar charts, a pie chart, a line chart and a heatmap.</p></li>
       <li class="reveal"><b>6</b><h3>Report</h3><p>Interpret patterns and export cleaned data and charts.</p></li>
     </ol>
 
-    <h3 class="sub reveal">Project architecture</h3>
+    <h3 class="sub reveal">System architecture</h3>
     <div class="flow reveal" role="list">
-      <div class="node" role="listitem"><strong>CSV dataset</strong><span>Video game sales records</span></div>
+      <div class="node" role="listitem"><strong>CSV dataset</strong><span>VGChartz vgsales.csv</span></div>
       <i aria-hidden="true">→</i>
-      <div class="node" role="listitem"><strong>Data loading</strong><span>Pandas DataFrame</span></div>
+      <div class="node" role="listitem"><strong>Pandas DataFrame</strong><span>Data loading and inspection</span></div>
       <i aria-hidden="true">→</i>
       <div class="node" role="listitem"><strong>Preprocessing</strong><span>Type conversion, null and duplicate handling</span></div>
       <i aria-hidden="true">→</i>
-      <div class="node" role="listitem"><strong>Analysis</strong><span>GroupBy, aggregation, regional comparison</span></div>
+      <div class="node" role="listitem"><strong>Aggregation (GroupBy)</strong><span>Genre, platform, publisher, region, year</span></div>
       <i aria-hidden="true">→</i>
-      <div class="node" role="listitem"><strong>Visualization</strong><span>Matplotlib and Seaborn charts</span></div>
+      <div class="node" role="listitem"><strong>Matplotlib / Seaborn charts</strong><span>Bar, pie and line charts, heatmap</span></div>
       <i aria-hidden="true">→</i>
-      <div class="node" role="listitem"><strong>Outputs</strong><span>Cleaned CSV, plots and findings</span></div>
+      <div class="node" role="listitem"><strong>Web dashboard (Vercel)</strong><span>Interactive charts and data explorer</span></div>
     </div>
-    <p class="note reveal">The project runs locally in Jupyter Notebook or as a Python script.</p>
+    <p class="note reveal"><strong>Tools:</strong> Python, Pandas, NumPy, Matplotlib, Seaborn and Jupyter Notebook for the analysis; HTML, CSS and JavaScript for the dashboard; GitHub and Vercel for deployment. Records without a release year (271) or publisher (58) are excluded only from the charts that use those fields. Sales are in millions of units.</p>
   </div>
 </section>
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">04 · Interactive dashboard</p>
+    <p class="eyebrow reveal">08 · Results · interactive dashboard</p>
     <h2 class="reveal">Explore the sales data</h2>
     <p class="sublede reveal">Hover, tap or use the keyboard on any bar, slice, cell or point. Sales are in millions of units. Switch between the project's top-100 sample and the full dataset to see how the picture changes.</p>
 
@@ -189,7 +273,7 @@
 <!-- FINDINGS -->
 <section id="findings" class="section">
   <div class="wrap">
-    <p class="eyebrow reveal">05 · Findings</p>
+    <p class="eyebrow reveal">09 · Results · findings</p>
     <h2 class="reveal">What the data says</h2>
     <div class="findings" id="findingsList"></div>
   </div>
@@ -198,7 +282,7 @@
 <!-- EXPLORER -->
 <section id="explorer" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">06 · Data explorer</p>
+    <p class="eyebrow reveal">10 · Data explorer</p>
     <h2 class="reveal">Browse all 16,598 games</h2>
     <p class="sublede reveal">Search the full dataset by title or publisher, filter by genre and platform, and sort by any column. <a href="assets/vgsales.csv" download>Download the CSV</a> to check the numbers yourself.</p>
     <div class="ex reveal" id="ex">
@@ -222,27 +306,31 @@
 <!-- DIFFERENT -->
 <section id="different" class="section">
   <div class="wrap">
-    <p class="eyebrow reveal">07 · Why this approach stands out</p>
-    <h2 class="reveal">Compared with reviewing raw tables</h2>
+    <p class="eyebrow reveal">11 · Why this approach stands out</p>
+    <h2 class="reveal">Compared with existing methods and raw tables</h2>
     <div class="compare reveal">
       <div class="col old">
         <h3>Existing approach</h3>
         <dl>
           <dt>Data view</dt><dd>Raw tables or separate static summaries</dd>
+          <dt>Focus</dt><dd>Existing studies mostly predict sales with regression or machine learning (see the literature survey)</dd>
+          <dt>Data used</dt><dd>Often small or restricted samples, such as 351 PC games or European sales only</dd>
           <dt>Comparison</dt><dd>Often requires manual filtering across categories</dd>
           <dt>Insights</dt><dd>Patterns across genres, platforms and regions can be harder to spot</dd>
           <dt>Updates</dt><dd>Repeated manual work when the data changes</dd>
-          <dt>Presentation</dt><dd>Numbers may be less intuitive to interpret</dd>
+          <dt>Presentation</dt><dd>Numbers may be less intuitive to interpret; rarely an interactive tool</dd>
         </dl>
       </div>
       <div class="col new">
         <h3>Our project</h3>
         <dl>
           <dt>Data view</dt><dd>Visual analysis of genre, platform, region and year</dd>
+          <dt>Focus</dt><dd>Descriptive, visual comparison by genre, platform, publisher, region and release year</dd>
+          <dt>Data used</dt><dd>The top-100 titles and the full 16,598-game dataset, across all platforms and regions</dd>
           <dt>Comparison</dt><dd>Grouped analysis brings multiple dimensions together</dd>
           <dt>Insights</dt><dd>Charts and a heatmap make patterns easier to identify</dd>
           <dt>Updates</dt><dd>Reusable Python workflow for cleaning and analysis</dd>
-          <dt>Presentation</dt><dd>Bar, pie and line charts communicate findings clearly</dd>
+          <dt>Presentation</dt><dd>Bar, pie and line charts plus an interactive dashboard communicate findings clearly</dd>
         </dl>
       </div>
     </div>
@@ -253,7 +341,7 @@
 <!-- LIMITS -->
 <section id="limits" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">08 · Limitations &amp; data notes</p>
+    <p class="eyebrow reveal">12 · Limitations &amp; data notes</p>
     <h2 class="reveal">What these results can and can't tell you</h2>
     <div class="limits">
       <div class="card reveal"><h3>Sample vs the whole market</h3><p>The project analysis covers the 100 best-selling titles, so it describes blockbusters. Switch the dashboard to "All games" to see how the conclusions change across every record.</p></div>
@@ -269,7 +357,7 @@
 <section id="conclusion" class="section">
   <div class="wrap two">
     <div class="reveal">
-      <p class="eyebrow">09 · Conclusion</p>
+      <p class="eyebrow">13 · Conclusion</p>
       <h2>What we learned</h2>
       <ul class="ticks">
         <li>The project demonstrates a complete beginner-level data analysis workflow.</li>
@@ -291,7 +379,7 @@
 <!-- FUTURE -->
 <section id="future" class="section alt">
   <div class="wrap">
-    <p class="eyebrow reveal">10 · Future implementation</p>
+    <p class="eyebrow reveal">14 · Future work</p>
     <h2 class="reveal">Where this goes next</h2>
     <ul class="future">
       <li class="reveal"><h3>Full dataset</h3><p>Extend the full 16,000+ record view previewed on this page into a complete analysis.</p></li>
@@ -305,11 +393,30 @@
   </div>
 </section>
 
+<!-- REFERENCES -->
+<section id="references" class="section">
+  <div class="wrap">
+    <p class="eyebrow reveal">15 · References</p>
+    <h2 class="reveal">Sources</h2>
+    <ol class="refs reveal">
+      <li>A. Marchand and T. Hennig-Thurau, "Value creation in the video game industry: Industry economics, consumer benefits, and research opportunities," <i>J. Interact. Mark.</i>, vol. 27, no. 3, pp. 141-157, 2013, doi: <a href="https://doi.org/10.1016/j.intmar.2013.05.001" rel="noopener">10.1016/j.intmar.2013.05.001</a>.</li>
+      <li>S. Heidenreich, F. Handrich, and T. Kraemer, "Flawless victory! Investigating search and experience qualities as antecedent predictors of video game success," <i>Electron. Mark.</i>, vol. 33, art. 20, 2023, doi: <a href="https://doi.org/10.1007/s12525-023-00647-2" rel="noopener">10.1007/s12525-023-00647-2</a>.</li>
+      <li>K. Wu, "Machine learning models-based video game sales prediction," in <i>Proc. 1st Int. Conf. E-commerce and Artificial Intelligence (ECAI)</i>, SciTePress, 2024, pp. 45-50, doi: <a href="https://doi.org/10.5220/0013205800004568" rel="noopener">10.5220/0013205800004568</a>.</li>
+      <li>D. Gray, A. M. Shalan, and C. Kadlec, "Sales predictions for video games using predictive analytics of market data," in <i>Proc. 16th IEEE Int. Conf. Computational Intelligence and Communication Networks (CICN)</i>, 2024, pp. 1510-1516, doi: <a href="https://doi.org/10.1109/CICN63059.2024.10847429" rel="noopener">10.1109/CICN63059.2024.10847429</a>.</li>
+      <li>VGChartz, "Video game sales data," vgchartz.com. Dataset used: vgsales.csv (distributed on Kaggle as "Video Game Sales"). <a href="assets/vgsales.csv" download>Download the CSV</a>.</li>
+      <li>C. R. Harris et al., "Array programming with NumPy," <i>Nature</i>, vol. 585, pp. 357-362, 2020.</li>
+      <li>W. McKinney, "Data structures for statistical computing in Python," in <i>Proc. 9th Python in Science Conf.</i>, 2010, pp. 56-61.</li>
+      <li>J. D. Hunter, "Matplotlib: A 2D graphics environment," <i>Comput. Sci. Eng.</i>, vol. 9, no. 3, pp. 90-95, 2007.</li>
+      <li>M. L. Waskom, "seaborn: Statistical data visualization," <i>J. Open Source Softw.</i>, vol. 6, no. 60, art. 3021, 2021.</li>
+    </ol>
+  </div>
+</section>
+
 </main>
 
 <footer>
   <div class="wrap">
-    <span>Global Video Game Sales &amp; Gaming Trend Analysis · Data Science &amp; Visualization Project</span>
+    <span>Global Video Game Sales &amp; Gaming Trend Analysis · Akshay A · Dayananda Sagar University</span>
     <span><a href="assets/video-game-sales-presentation.pptx" download>Download slides</a> · <a href="#top">Back to top ↑</a></span>
   </div>
 </footer>

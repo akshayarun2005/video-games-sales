@@ -3,7 +3,7 @@
 Static website for the Data Science & Visualization project. No build step, so Vercel serves it as is.
 
 ```
-index.html     page content
+index.html     page content (sections follow the presentation: introduction to references)
 styles.css     styling
 script.js      interactive dashboard (SVG charts, filters, tooltips)
 data.js        all numbers behind the dashboard, computed from the CSV with pandas
